@@ -107,7 +107,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iKs-TJ-rWJ">
                                 <rect key="frame" x="20" y="134" width="335" height="463"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.9010663628578186" green="0.96932834386825562" blue="0.96911340951919556" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlayersTableViewCell" id="Ma5-8p-QIR" customClass="PlayersTableViewCell" customModule="bollen" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="335" height="44"/>
@@ -123,6 +123,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottomMargin" secondItem="sXi-OK-8vd" secondAttribute="bottom" id="9Dk-Q3-cXu"/>
                                                 <constraint firstItem="sXi-OK-8vd" firstAttribute="leading" secondItem="8w3-yB-bbC" secondAttribute="leadingMargin" id="QaV-qd-Mzm"/>
@@ -252,7 +253,7 @@
                                     <action selector="startRoundButtonClick:" destination="Z5A-V3-pE9" eventType="touchUpInside" id="XaE-7E-xWf"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ag4-69-dKY">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ag4-69-dKY">
                                 <rect key="frame" x="0.0" y="109" width="385" height="498"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -260,7 +261,7 @@
                                         <rect key="frame" x="0.0" y="28" width="385" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vH0-C7-ae5" id="4fF-M3-A9d">
-                                            <rect key="frame" x="0.0" y="0.0" width="385" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="385" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Iu9-3G-vVA">
@@ -349,6 +350,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="content" destination="4fF-M3-A9d" id="IZq-LP-FeX"/>
                                             <outlet property="dealerLastLabel" destination="la4-qn-HdG" id="A9K-nS-2u0"/>
                                             <outlet property="finalRoundsButton" destination="Ivh-q1-Rs0" id="19G-Jj-Mm3"/>
                                             <outlet property="guessedRoundsButton" destination="p33-To-hbn" id="t3F-lH-Bmc"/>
@@ -395,7 +397,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.83441952720000001" green="0.83441952720000001" blue="0.83441952720000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="YzM-wd-waR"/>
                                 </constraints>

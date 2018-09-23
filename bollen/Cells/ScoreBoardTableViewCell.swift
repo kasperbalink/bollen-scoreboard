@@ -15,13 +15,17 @@ class ScoreBoardTableViewCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet var playerInitial: UILabel!
     @IBOutlet var score: UILabel!
     @IBOutlet var dealerLastLabel: UILabel!
-    
+    @IBOutlet var content: UIView!
     var player : Player!
 
 
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        //content.layer.borderColor = UIColor(red:222/255, green:225/255, blue:227/255, alpha: 1).cgColor
+       // content.layer.borderWidth = 1
+        content.layer.cornerRadius = 5
+        self.layoutMargins = UIEdgeInsets(top: 15, left: 5, bottom: 15, right: 5)
         NotificationCenter.default.addObserver(self, selector: #selector(self.otherPlayerUpdatedGuessedRounds(notification:)), name: Notification.Name("guessedRoundsUpdate"), object: nil)
         finalRoundsButton.isEnabled = false
     }

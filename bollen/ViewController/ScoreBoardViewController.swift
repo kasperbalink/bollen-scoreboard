@@ -83,6 +83,8 @@ class ScoreBoardViewController: UIViewController, UITableViewDelegate, UITableVi
         scoreboard.nextRound()
         
         for cell in cells {
+            cell.finalRoundsButton.setTitle("0", for: .normal);
+            cell.guessedRoundsButton.setTitle("0", for: .normal);
             cell.guessedRoundsButton.isEnabled = true
             cell.player.guessedRounds = 0
             cell.finalRoundsButton.isEnabled = false

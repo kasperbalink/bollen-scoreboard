@@ -13,13 +13,16 @@ let sharedScoreBoardController = ScoreBoardController()
 class ScoreBoardController {
     var players: Array<Player> = []
 
-    var playersIdx = 0;
     var lastPlayer = 0;
     var dealer = 0;
-    var round: Int = 1;
-    var roundsToBePlayed = 2
+    
+    var currentCards = 1;
+    let maxCards = 6;
+    let roundsToBePlayed = 12
+    var currentRound = 1;
     
     var totalGuessed = 0;
+    var finalRounds = 0;
     
     init() {
     }
@@ -37,22 +40,26 @@ class ScoreBoardController {
         print("total:\(totalGuessed) - round:\(round) - last:\(lastPlayer)")
     }
     
-    
     var countUp = true;
     func nextRound() {
+        if(finalRounds != currentRound) {
+            return
+        }
         
         for player in players {
             if(player.finalRounds == player.guessedRounds) {
                 player.score += 1
             }
+            player.finalRounds = 0
+            player.guessedRounds = 0
         }
         
-        if(round < roundsToBePlayed && countUp){
-            round += 1
+        if(currentCards < maxCards && countUp){
+            currentCards += 1
         }
         else {
             countUp = false
-            round -= 1
+            currentCards -= 1
         }
         
         lastPlayer += 1;
@@ -64,6 +71,9 @@ class ScoreBoardController {
         if(dealer > players.count - 1){
             dealer = 0;
         }
+        
+        currentRound += 1
+        finalRounds = 0;
         NotificationCenter.default.post(name: Notification.Name("guessedRoundsUpdate"), object: nil)
     }
 }

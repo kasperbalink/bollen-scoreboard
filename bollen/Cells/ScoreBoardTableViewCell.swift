@@ -22,23 +22,20 @@ class ScoreBoardTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        //content.layer.borderColor = UIColor(red:222/255, green:225/255, blue:227/255, alpha: 1).cgColor
-       // content.layer.borderWidth = 1
-        content.layer.cornerRadius = 5
-        self.layoutMargins = UIEdgeInsets(top: 15, left: 5, bottom: 15, right: 5)
+        content.layer.cornerRadius = 20
         NotificationCenter.default.addObserver(self, selector: #selector(self.otherPlayerUpdatedGuessedRounds(notification:)), name: Notification.Name("guessedRoundsUpdate"), object: nil)
         finalRoundsButton.isEnabled = false
     }
     
     @objc func otherPlayerUpdatedGuessedRounds(notification: Notification){
         let scoreboard = sharedScoreBoardController;
-        if(player.last && scoreboard.totalGuessed == scoreboard.round)
+        if(player.last && scoreboard.totalGuessed == scoreboard.currentCards)
         {
             player.guessedRounds += 1;
-            if(player.guessedRounds > scoreboard.round){
+            if(player.guessedRounds > scoreboard.currentCards){
                 player.guessedRounds = 0
             }
-            print("UPDATE: \(player.guessedRounds) for \(player.name)");
+            //print("UPDATE: \(player.guessedRounds) for \(player.name)");
             scoreboard.updateTotalGuesed()
         }
     }
@@ -71,14 +68,14 @@ class ScoreBoardTableViewCell: UITableViewCell, UITextFieldDelegate {
         let scoreboard = sharedScoreBoardController;
 
         player.guessedRounds += 1;
-        if(player.guessedRounds > scoreboard.round){
+        if(player.guessedRounds > scoreboard.currentCards){
             player.guessedRounds = 0
         }
         scoreboard.updateTotalGuesed();
         
-        if(player.last && scoreboard.round == scoreboard.totalGuessed){
+        if(player.last && scoreboard.currentCards == scoreboard.totalGuessed){
             player.guessedRounds += 1;
-            if(player.guessedRounds > scoreboard.round){
+            if(player.guessedRounds > scoreboard.currentCards){
                 player.guessedRounds = 0
             }
             scoreboard.updateTotalGuesed()
@@ -87,15 +84,21 @@ class ScoreBoardTableViewCell: UITableViewCell, UITextFieldDelegate {
         guessedRoundsButton.setTitle(String(player.guessedRounds), for: .normal)
     }
     
-    var finalRounds = 0
     @IBAction func finalRoundsButtonClick(_ sender: UIButton) {
         let scoreboard = sharedScoreBoardController;
-        finalRounds += 1;
-        if(finalRounds > scoreboard.round){
-            finalRounds = 0
+        player.finalRounds += 1;
+        scoreboard.finalRounds += 1
+        let oldValue = player.finalRounds;
+        if(player.finalRounds > scoreboard.currentCards || scoreboard.finalRounds > scoreboard.currentCards){
+            player.finalRounds = 0
         }
-        finalRoundsButton.setTitle(String(finalRounds), for: .normal)
-        player.finalRounds = finalRounds
+        if(player.finalRounds == 0){
+            scoreboard.finalRounds -= oldValue;
+        }
+        
+        print("final: \(scoreboard.finalRounds)")
+      
+        finalRoundsButton.setTitle(String(player.finalRounds), for: .normal)
     }
     
 }

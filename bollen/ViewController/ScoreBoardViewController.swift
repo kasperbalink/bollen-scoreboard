@@ -14,13 +14,14 @@ class ScoreBoardViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet var nextRound : UIButton!
     @IBOutlet var scoreboardTableView: UITableView!
     var scoreboard : ScoreBoardController = sharedScoreBoardController;
+    var finishGame = false
     override func viewDidLoad() {
         super.viewDidLoad()
         scoreboard.setupLastPlayer()
         scoreboardTableView.allowsSelection = false
         scoreboardTableView.delegate = self
         scoreboardTableView.dataSource = self
-        self.title = "Round \(scoreboard.round)/\(scoreboard.roundsToBePlayed)"
+        self.title = "Round \(scoreboard.currentCards)/\(scoreboard.roundsToBePlayed)"
         NotificationCenter.default.addObserver(self, selector: #selector(self.otherPlayerUpdatedGuessedRounds(notification:)), name: Notification.Name("guessedRoundsUpdate"), object: nil)
         // Do any additional setup after loading the view.
     }
@@ -69,7 +70,8 @@ class ScoreBoardViewController: UIViewController, UITableViewDelegate, UITableVi
             cell.finalRoundsButton.backgroundColor = UIColor(red: 213/255, green:62/255, blue:53/255, alpha:1)
         }
         
-        if(scoreboard.round == 1 && !scoreboard.countUp){
+        if(scoreboard.currentCards == 1 && !scoreboard.countUp){
+            finishGame = true
             nextRound.setTitle("Finish game", for: UIControlState.normal)
         }
         nextRound.isHidden = false;
@@ -78,6 +80,10 @@ class ScoreBoardViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     @IBAction func nextRoundButtonClick(_ sender: UIButton) {
+        if(finishGame){
+            
+        }
+        
         let cells = self.scoreboardTableView.visibleCells as! Array<ScoreBoardTableViewCell>
         
         scoreboard.nextRound()
@@ -93,7 +99,7 @@ class ScoreBoardViewController: UIViewController, UITableViewDelegate, UITableVi
             cell.finalRoundsButton.backgroundColor = UIColor(red: 231/255, green:129/255, blue:132/255, alpha:0.42)
         }
 
-        self.title = "Round \(scoreboard.round)/\(scoreboard.roundsToBePlayed)"
+        self.title = "Round \(scoreboard.currentRound)/\(scoreboard.roundsToBePlayed)"
         
         nextRound.isHidden = true;
         startRound.isHidden = false;
